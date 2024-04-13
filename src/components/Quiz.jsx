@@ -1,18 +1,13 @@
 import { useState } from "react";
 import QUESTIONS from "../questions";
 import quizCompleteImg from "../assets/quiz-complete.png";
+import QuestionTimer from "./QuestionTimer";
 
 export default function Quiz() {
   const [userAnswers, setUserAnswers] = useState([]);
   const activeQuestionIndex = userAnswers.length;
 
   const quizIsComplete = activeQuestionIndex === QUESTIONS.length;
-
-  function handleSelectAnswer(selectedAnswer) {
-    setUserAnswers((prevUserAnswers) => {
-      return [...prevUserAnswers, selectedAnswer];
-    });
-  }
 
   if (quizIsComplete) {
     return (
@@ -27,9 +22,21 @@ export default function Quiz() {
   //making a copy first, because sort() will not make a new copy and i need the original answers order unchanged
   shuffledAnswers.sort(() => Math.random() - 0.5); //50% negative values, 50% positive values
 
+  function handleSelectAnswer(selectedAnswer) {
+    setUserAnswers((prevUserAnswers) => {
+      return [...prevUserAnswers, selectedAnswer];
+    });
+  }
+
   return (
     <div id="quiz">
       <div id="question">
+        <QuestionTimer
+          timeout={10000}
+          onTimeout={() => {
+            handleSelectAnswer(null);
+          }}
+        />
         <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
         <ul id="answers">
           {shuffledAnswers.map((answer) => (
