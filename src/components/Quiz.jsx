@@ -44,7 +44,7 @@ export default function Quiz() {
         // it unmounts and remounts it
         // that's how we can get new timer for every new question
         onSelectAnswer={handleSelectAnswer}
-        onSkipAnswer={handleSkipAnswer}
+        onAnswerSkipped={handleSkipAnswer}
       />
     </div>
   );
