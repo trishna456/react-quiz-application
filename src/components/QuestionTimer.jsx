@@ -4,11 +4,9 @@ export default function QuestionTimer({ timeout, onTimeout }) {
   const [remainingTime, setRemainingTime] = useState(timeout);
 
   useEffect(() => {
-    console.log("TIMOUT");
     const timer = setTimeout(onTimeout, timeout);
 
     return () => {
-      console.log("clearing timer...");
       clearTimeout(timer);
     };
     /* the clean up function (mentioned inside return) will automatically be executed by react 
@@ -19,14 +17,12 @@ export default function QuestionTimer({ timeout, onTimeout }) {
   // dependencies inside useEffect are the state or prop values that the function is dependent upon
 
   useEffect(() => {
-    console.log("INTERVAL");
     const interval = setInterval(() => {
       setRemainingTime((prevTime) => prevTime - 100);
     }, 100);
 
     return () => {
       //clean up function
-      console.log("clearing interval...");
       clearInterval(interval);
     };
   }, []);
