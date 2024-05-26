@@ -1,4 +1,4 @@
-# Quiz App
+# React Quiz App
 
 An advanced Quiz application built with React, featuring dynamic data binding, user event handling, and comprehensive state management.
 
